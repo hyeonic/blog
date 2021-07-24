@@ -20,20 +20,16 @@ public class User {
 
     private String email;
 
-    private String password;
-
     private String name;
 
     @Builder
-    private User(String email, String password, String name) {
+    private User(String email, String name) {
         this.email = email;
-        this.password = password;
         this.name = name;
     }
 
     public void update(User user) {
         this.email = user.getEmail();
-        this.password = user.getPassword();
         this.name = user.getName();
     }
 }

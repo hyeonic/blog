@@ -5,3 +5,4 @@ spring:
     group:
       local:
         - oauth
+        - db

@@ -10,4 +10,8 @@ public class GoogleResponseDto {
     private String refresh_token;
     private String scope;
     private String token_type;
+
+    public String getTokenTypeAndAccessToken() {
+        return token_type + " " + access_token;
+    }
 }
