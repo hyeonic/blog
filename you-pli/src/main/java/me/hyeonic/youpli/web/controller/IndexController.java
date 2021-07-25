@@ -1,4 +1,4 @@
-package me.hyeonic.youpli.web.api;
+package me.hyeonic.youpli.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
