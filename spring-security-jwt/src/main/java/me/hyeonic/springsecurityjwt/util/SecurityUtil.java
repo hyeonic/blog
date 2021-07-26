@@ -1,0 +1,37 @@
+package me.hyeonic.springsecurityjwt.util;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Optional;
+
+@Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class SecurityUtil {
+
+    // Security Context의 Authentication 객체를 이용하여 user id를 return 해주는 유틸성 메소드
+    public static Optional<Long> getCurrentUserId() {
+        // Security Context에 Authentication 객체가 저장되는 시점은
+        // JwtFilter의 doFilter메소드에서 Request가 들어올 때 SecurityContext에 Authentication 객체를 저장해서 사용
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null) {
+            log.debug("Security Context에 인증 정보가 없습니다.");
+            return Optional.empty();
+        }
+
+        Long userId = null;
+        if (authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
+            userId = Long.parseLong(springSecurityUser.getUsername());
+        } else if (authentication.getPrincipal() instanceof Long) {
+            userId = (Long) authentication.getPrincipal();
+        }
+
+        return Optional.ofNullable(userId);
+    }
+}

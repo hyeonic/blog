@@ -1,6 +1,9 @@
 package me.hyeonic.springsecurityjwt.dto.user;
 
 import lombok.Getter;
+import me.hyeonic.springsecurityjwt.domain.Role;
+import me.hyeonic.springsecurityjwt.domain.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
