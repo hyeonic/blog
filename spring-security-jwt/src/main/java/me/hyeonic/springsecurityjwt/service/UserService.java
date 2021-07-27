@@ -42,7 +42,7 @@ public class UserService {
     public UserMainResponseDto findById(Long id) {
         return userRepository.findById(id)
                 .map(user -> new UserMainResponseDto(user))
-                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 user 입니다. id=" + id));
     }
 
     public UserMainResponseDto findUserInfo() {
@@ -51,6 +51,6 @@ public class UserService {
 
         return userRepository.findById(id)
                 .map(user -> new UserMainResponseDto(user))
-                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 user 입니다. id=" + id));
     }
 }

@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
@@ -19,19 +18,11 @@ public class SecurityUtil {
         // JwtFilter의 doFilter메소드에서 Request가 들어올 때 SecurityContext에 Authentication 객체를 저장해서 사용
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication == null) {
-            log.debug("Security Context에 인증 정보가 없습니다.");
+        if (authentication == null || authentication.getName() == null) {
             return Optional.empty();
         }
 
-        Long userId = null;
-        if (authentication.getPrincipal() instanceof UserDetails) {
-            UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
-            userId = Long.parseLong(springSecurityUser.getUsername());
-        } else if (authentication.getPrincipal() instanceof Long) {
-            userId = (Long) authentication.getPrincipal();
-        }
-
-        return Optional.ofNullable(userId);
+        long userId = Long.parseLong(authentication.getName());
+        return Optional.of(userId);
     }
 }

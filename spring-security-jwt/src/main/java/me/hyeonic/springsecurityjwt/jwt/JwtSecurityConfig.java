@@ -7,7 +7,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
-// TokenProvider, JwtFilter를 SecurityConfig에 적용할 때 사용할 JwtSecurityConfig
+// JwtFilter를 SecurityConfig에 적용할 때 사용할 JwtSecurityConfig
 @Component
 @RequiredArgsConstructor
 public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
