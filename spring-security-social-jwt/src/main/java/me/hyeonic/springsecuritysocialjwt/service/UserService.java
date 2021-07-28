@@ -2,11 +2,10 @@ package me.hyeonic.springsecuritysocialjwt.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.hyeonic.springsecuritysocialjwt.domain.user.Role;
 import me.hyeonic.springsecuritysocialjwt.domain.user.User;
 import me.hyeonic.springsecuritysocialjwt.domain.user.UserRepository;
 import me.hyeonic.springsecuritysocialjwt.dto.user.UserMainResponseDto;
-import me.hyeonic.springsecuritysocialjwt.dto.user.UserSaveRequestDto;
+import me.hyeonic.springsecuritysocialjwt.dto.user.UserSaveOrUpdateRequestDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +18,16 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long save(UserSaveRequestDto requestDto) {
+    public UserMainResponseDto saveOrUpdate(UserSaveOrUpdateRequestDto requestDto) {
+        User user = userRepository.findByEmail(requestDto.getEmail()).orElse(null);
 
-        User user = User.builder()
-                .email(requestDto.getEmail())
-                .name(requestDto.getName())
-                .role(Role.ROLE_USER)
-                .build();
+        if (user == null) {
+            return new UserMainResponseDto(userRepository.save(requestDto.toEntity()));
+        }
 
-        return userRepository.save(user).getId();
+        user.update(requestDto.toEntity());
+
+        return new UserMainResponseDto(user);
     }
 
     public UserMainResponseDto findById(Long id) {
