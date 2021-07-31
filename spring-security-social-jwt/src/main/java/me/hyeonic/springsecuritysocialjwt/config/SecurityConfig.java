@@ -4,11 +4,6 @@ import lombok.RequiredArgsConstructor;
 import me.hyeonic.springsecuritysocialjwt.jwt.JwtAccessDeniedHandler;
 import me.hyeonic.springsecuritysocialjwt.jwt.JwtAuthenticationEntryPoint;
 import me.hyeonic.springsecuritysocialjwt.jwt.JwtSecurityConfig;
-import me.hyeonic.springsecuritysocialjwt.security.CustomAuthenticationProvider;
-import me.hyeonic.springsecuritysocialjwt.service.CustomUserDetailsService;
-import me.hyeonic.springsecuritysocialjwt.service.GoogleService;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -26,12 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final JwtSecurityConfig jwtSecurityConfig;
-    private final CustomAuthenticationProvider customAuthenticationProvider;
+    private final AuthenticationProvider authenticationProvider;
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) {
         auth.
-                authenticationProvider(customAuthenticationProvider);
+                authenticationProvider(authenticationProvider);
     }
 
     @Override

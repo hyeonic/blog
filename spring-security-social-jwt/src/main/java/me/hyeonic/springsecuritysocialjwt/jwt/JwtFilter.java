@@ -25,9 +25,8 @@ public class JwtFilter implements Filter {
     private final TokenProvider tokenProvider;
 
     @Override
-    public void doFilter(ServletRequest request,
-                         ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
+    public void doFilter(
+            ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 

@@ -39,9 +39,6 @@ public class AuthService {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userMainResponseDto.getEmail(), "");
 
-        // AuthenticationToken 객체의 details 필드에 social token 정보 저장
-        authenticationToken.setDetails(googleTokenInfo);
-
         // 인증 요청
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
