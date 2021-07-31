@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import me.hyeonic.springsecurityjwt.dto.token.TokenResponseDto;
 import me.hyeonic.springsecurityjwt.dto.user.UserLoginDto;
 import me.hyeonic.springsecurityjwt.jwt.JwtFilter;
-import me.hyeonic.springsecurityjwt.jwt.TokenProvider;
 import me.hyeonic.springsecurityjwt.service.AuthService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

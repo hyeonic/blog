@@ -46,11 +46,11 @@ public class UserService {
     }
 
     public UserMainResponseDto findUserInfo() {
-        Long id = SecurityUtil.getCurrentUserId().orElseThrow(() ->
+        String email = SecurityUtil.getCurrentEmail().orElseThrow(() ->
                 new RuntimeException("Security Context에 인증 정보가 없습니다."));
 
-        return userRepository.findById(id)
+        return userRepository.findByEmail(email)
                 .map(user -> new UserMainResponseDto(user))
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 user 입니다. id=" + id));
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 user 입니다. email=" + email));
     }
 }
