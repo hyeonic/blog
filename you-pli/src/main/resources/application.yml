@@ -1,9 +1,0 @@
-spring:
-  profiles:
-    active: local
-
-    group:
-      local:
-        - oauth
-        - db
-        - jwt
