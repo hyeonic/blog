@@ -1,7 +1,0 @@
-social:
-  registration:
-    google:
-      request-url: https://accounts.google.com/o/oauth2/token
-      client-id: 64965047662-dqmh17ajhvdl3f4pjmsoohulegrpi942.apps.googleusercontent.com
-      client-secret: Jot6ZF-u2T_NqckKqv1Bwbx0
-      redirect-uri: http://localhost:8080/oauth2callback
