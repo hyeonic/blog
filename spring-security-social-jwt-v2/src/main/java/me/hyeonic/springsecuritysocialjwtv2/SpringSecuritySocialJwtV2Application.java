@@ -9,5 +9,4 @@ public class SpringSecuritySocialJwtV2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSecuritySocialJwtV2Application.class, args);
 	}
-
 }

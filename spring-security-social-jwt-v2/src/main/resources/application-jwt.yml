@@ -1,0 +1,6 @@
+jwt:
+  grant-type: bearer
+  header: Authorization
+  secret: bWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGk=
+  access-token-validity-in-seconds: 1800 # 60 * 30 = 1800초 30분
+  refresh-token-validity-in-seconds: 1209600 # 60 * 60 * 24 * 14 = 1209600초 2주
