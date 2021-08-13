@@ -48,17 +48,17 @@ public class GoogleService {
         return restTemplate.postForObject(requestUrl, googleRequest, GoogleTokenInfo.class);
     }
 
-    public YoutubePlaylistDto.Playlists getPlaylist(String accessToken) {
+    public YoutubePlaylistDto.Playlists getPlaylists(String accessToken) {
         String url = "https://www.googleapis.com/youtube/v3/playlists";
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("part", "id,snippet,status")
                 .queryParam("mine", "true");
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", accessToken);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Authorization", accessToken);
 
-        HttpEntity request = new HttpEntity(headers);
+        HttpEntity request = new HttpEntity(httpHeaders);
         ResponseEntity<YoutubePlaylistDto.Playlists> response = restTemplate.exchange(
                 builder.toUriString(),
                 HttpMethod.GET,

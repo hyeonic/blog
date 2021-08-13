@@ -11,6 +11,9 @@
     <div>
         <img id="googleLoginBtn" src="./images/google-login-btn.png">
     </div>
+    <div>
+        <img id="spotifyLoginBtn" src="./images/spotify-login-btn.png">
+    </div>
 </fieldset>
 </body>
 
@@ -26,5 +29,17 @@
 
     const googleLoginBtn = document.getElementById("googleLoginBtn");
     googleLoginBtn.addEventListener("click", onClickGoogleLogin);
+
+    const onClickSpotifyLogin = () => {
+        window.location.replace("https://accounts.spotify.com/authorize?" +
+            "client_id=acdf56e8344d4a2fb316cade08686bb4&" +
+            "response_type=code&" +
+            "redirect_uri=http://localhost:8080/api/spotify/callback&" +
+            "scope=user-read-private user-read-email playlist-read-private&" +
+            "state=12345")
+    }
+
+    const spotifyLoginBtn = document.getElementById("spotifyLoginBtn");
+    spotifyLoginBtn.addEventListener("click", onClickSpotifyLogin);
 </script>
 </html>

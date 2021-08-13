@@ -9,7 +9,6 @@ import java.util.List;
 public class YoutubePlaylistDto {
 
     @Getter
-    @AllArgsConstructor
     public static class Playlists {
         private String kind;
         private String etag;
@@ -17,14 +16,12 @@ public class YoutubePlaylistDto {
         private List<Item> items;
 
         @Getter
-        @AllArgsConstructor
         private static class PageInfo {
             private String totalResults;
             private String resultsPerPage;
         }
 
         @Getter
-        @AllArgsConstructor
         private static class Item {
             private String kind;
             private String etag;
@@ -33,7 +30,6 @@ public class YoutubePlaylistDto {
             private Status status;
 
             @Getter
-            @AllArgsConstructor
             private static class Snippet {
                 private String publishedAt;
                 private String channelId;
@@ -43,13 +39,11 @@ public class YoutubePlaylistDto {
                 private String channelTitle;
 
                 @Getter
-                @AllArgsConstructor
                 private static class Thumbnails {
                 }
             }
 
             @Getter
-            @AllArgsConstructor
             private static class Status {
                 private String privacyStatus;
             }
