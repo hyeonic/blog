@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: local
+
+    group:
+      local:
+        - oauth
+        - db
+
+logging:
+  level:
+    me.hyeonic: DEBUG
