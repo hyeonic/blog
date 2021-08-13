@@ -1,9 +1,9 @@
 package me.hyeonic.playlist.dto.social.google.playlist;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.Map;
 
 @Getter
 public class YoutubePlaylistDto {
@@ -35,18 +35,21 @@ public class YoutubePlaylistDto {
                 private String channelId;
                 private String title;
                 private String description;
-//                private List<Thumbnails> thumbnails;
+                private Map<String, Thumbnail> thumbnails;
                 private String channelTitle;
 
                 @Getter
-                private static class Thumbnails {
+                private static class Thumbnail {
+                    private String url;
+                    private String width;
+                    private String height;
                 }
             }
+        }
 
-            @Getter
-            private static class Status {
-                private String privacyStatus;
-            }
+        @Getter
+        private static class Status {
+            private String privacyStatus;
         }
     }
 }

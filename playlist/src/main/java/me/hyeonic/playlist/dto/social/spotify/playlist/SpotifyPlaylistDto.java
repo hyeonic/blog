@@ -24,7 +24,7 @@ public class SpotifyPlaylistDto {
             private ExternalUrls external_urls;
             private String href;
             private String id;
-//            private List<Image> images;
+            private List<Image> images;
             private String name;
             private Owner owner;
             private String primary_color;
@@ -41,6 +41,9 @@ public class SpotifyPlaylistDto {
 
             @Getter
             private static class Image {
+                private String height;
+                private String url;
+                private String width;
             }
 
             @Getter
