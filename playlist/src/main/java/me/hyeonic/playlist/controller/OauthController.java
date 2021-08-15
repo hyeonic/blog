@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.hyeonic.playlist.controller.response.BasicResponse;
 import me.hyeonic.playlist.controller.response.CommonResponse;
+import me.hyeonic.playlist.dto.nonplaylist.NonPlaylistDto;
+import me.hyeonic.playlist.dto.social.TracksMainDto;
 import me.hyeonic.playlist.dto.social.google.GoogleTokenInfo;
 import me.hyeonic.playlist.dto.social.google.playlist.YoutubePlaylistDto;
 import me.hyeonic.playlist.dto.social.spotify.SpotifyTokenInfo;
@@ -27,17 +29,29 @@ public class OauthController {
     public ResponseEntity<? extends BasicResponse> googleCallback(@RequestParam String code) {
 
         GoogleTokenInfo googleTokenInfo = googleService.getAccessToken(code);
-        YoutubePlaylistDto.Playlists playlists = googleService.getPlaylists(googleTokenInfo.getTokenTypeAndAccessToken());
+//        YoutubePlaylistDto.Playlists playlists = googleService.getPlaylists(googleTokenInfo.getTokenTypeAndAccessToken());
+//
+//        NonPlaylistDto.PlayLists nonPlaylists = playlists.toNonPlaylists();
 
-        return ResponseEntity.ok(new CommonResponse<>(playlists));
+        YoutubePlaylistDto.Playlist playlist = googleService.getPlaylist(googleTokenInfo.getTokenTypeAndAccessToken());
+
+        TracksMainDto tracksMainDto = playlist.toTracks();
+
+        return ResponseEntity.ok(new CommonResponse<>(tracksMainDto));
     }
 
     @GetMapping("api/spotify/callback")
     public ResponseEntity<? extends BasicResponse> spotifyCallback(@RequestParam String code) {
 
         SpotifyTokenInfo spotifyTokenInfo = spotifyService.getAccessToken(code);
-        SpotifyPlaylistDto.Playlists playlists = spotifyService.getPlaylists(spotifyTokenInfo.getTokenTypeAndAccessToken());
+//        SpotifyPlaylistDto.Playlists playlists = spotifyService.getPlaylists(spotifyTokenInfo.getTokenTypeAndAccessToken());
+//
+//        NonPlaylistDto.PlayLists nonPlaylists = playlists.toNonPlaylists();
 
-        return ResponseEntity.ok(new CommonResponse<>(playlists));
+        SpotifyPlaylistDto.Playlist playlist = spotifyService.getPlaylist(spotifyTokenInfo.getTokenTypeAndAccessToken());
+
+        TracksMainDto tracksMainDto = playlist.toTracks();
+
+        return ResponseEntity.ok(new CommonResponse<>(tracksMainDto));
     }
 }

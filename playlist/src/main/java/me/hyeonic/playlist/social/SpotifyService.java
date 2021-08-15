@@ -85,4 +85,21 @@ public class SpotifyService {
 
         return response.getBody();
     }
+
+    public SpotifyPlaylistDto.Playlist getPlaylist(String accessToken) {
+        String url = "https://api.spotify.com/v1/playlists/4hCmls37NZkju3sLkJbRqX";
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Authorization", accessToken);
+
+        HttpEntity request = new HttpEntity(httpHeaders);
+        ResponseEntity<SpotifyPlaylistDto.Playlist> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                SpotifyPlaylistDto.Playlist.class
+        );
+
+        return response.getBody();
+    }
 }

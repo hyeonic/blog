@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.hyeonic.playlist.dto.social.google.GoogleRequestDto;
 import me.hyeonic.playlist.dto.social.google.GoogleTokenInfo;
 import me.hyeonic.playlist.dto.social.google.playlist.YoutubePlaylistDto;
+import me.hyeonic.playlist.dto.social.spotify.playlist.SpotifyPlaylistDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -64,6 +65,29 @@ public class GoogleService {
                 HttpMethod.GET,
                 request,
                 YoutubePlaylistDto.Playlists.class
+        );
+
+        return response.getBody();
+    }
+
+    public YoutubePlaylistDto.Playlist getPlaylist(String accessToken) {
+        String url = "https://www.googleapis.com/youtube/v3/playlistItems?" +
+                "part=id,snippet,contentDetails,status&" +
+                "playlistId=PLKoYnF1HLQ5gW5DPfWI8erSG-MfjEJE2k&" +
+                "maxResults=50";
+
+//        PLKoYnF1HLQ5hPHZzXAogdcdbxJowoEUWm
+//        PLKoYnF1HLQ5gW5DPfWI8erSG-MfjEJE2k
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Authorization", accessToken);
+
+        HttpEntity request = new HttpEntity(httpHeaders);
+        ResponseEntity<YoutubePlaylistDto.Playlist> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                YoutubePlaylistDto.Playlist.class
         );
 
         return response.getBody();
