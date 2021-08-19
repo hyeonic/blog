@@ -29,15 +29,15 @@ public class OauthController {
     public ResponseEntity<? extends BasicResponse> googleCallback(@RequestParam String code) {
 
         GoogleTokenInfo googleTokenInfo = googleService.getAccessToken(code);
-//        YoutubePlaylistDto.Playlists playlists = googleService.getPlaylists(googleTokenInfo.getTokenTypeAndAccessToken());
+        YoutubePlaylistDto.Playlists playlists = googleService.getPlaylists(googleTokenInfo.getTokenTypeAndAccessToken());
 //
-//        NonPlaylistDto.PlayLists nonPlaylists = playlists.toNonPlaylists();
+        NonPlaylistDto.PlayLists nonPlaylists = playlists.toNonPlaylists();
 
-        YoutubePlaylistDto.Playlist playlist = googleService.getPlaylist(googleTokenInfo.getTokenTypeAndAccessToken());
+//        YoutubePlaylistDto.Playlist playlist = googleService.getPlaylist(googleTokenInfo.getTokenTypeAndAccessToken());
 
-        TracksMainDto tracksMainDto = playlist.toTracks();
+//        TracksMainDto tracksMainDto = playlist.toTracks();
 
-        return ResponseEntity.ok(new CommonResponse<>(tracksMainDto));
+        return ResponseEntity.ok(new CommonResponse<>(nonPlaylists));
     }
 
     @GetMapping("api/spotify/callback")
