@@ -1,4 +1,4 @@
-package me.hyeonic.playlist.feign;
+package me.hyeonic.playlist.feign.google;
 
 import me.hyeonic.playlist.dto.social.google.playlist.YoutubePlaylistDto;
 import org.springframework.cloud.openfeign.FeignClient;

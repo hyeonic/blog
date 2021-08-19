@@ -30,12 +30,12 @@ public class OauthController {
 
         GoogleTokenInfo googleTokenInfo = googleService.getAccessToken(code);
         YoutubePlaylistDto.Playlists playlists = googleService.getPlaylists(googleTokenInfo.getTokenTypeAndAccessToken());
-//
+
         NonPlaylistDto.PlayLists nonPlaylists = playlists.toNonPlaylists();
 
-//        YoutubePlaylistDto.Playlist playlist = googleService.getPlaylist(googleTokenInfo.getTokenTypeAndAccessToken());
+        YoutubePlaylistDto.Playlist playlist = googleService.getPlaylist(googleTokenInfo.getTokenTypeAndAccessToken());
 
-//        TracksMainDto tracksMainDto = playlist.toTracks();
+        TracksMainDto tracksMainDto = playlist.toTracks();
 
         return ResponseEntity.ok(new CommonResponse<>(nonPlaylists));
     }
@@ -44,14 +44,14 @@ public class OauthController {
     public ResponseEntity<? extends BasicResponse> spotifyCallback(@RequestParam String code) {
 
         SpotifyTokenInfo spotifyTokenInfo = spotifyService.getAccessToken(code);
-//        SpotifyPlaylistDto.Playlists playlists = spotifyService.getPlaylists(spotifyTokenInfo.getTokenTypeAndAccessToken());
-//
-//        NonPlaylistDto.PlayLists nonPlaylists = playlists.toNonPlaylists();
+        SpotifyPlaylistDto.Playlists playlists = spotifyService.getPlaylists(spotifyTokenInfo.getTokenTypeAndAccessToken());
+
+        NonPlaylistDto.PlayLists nonPlaylists = playlists.toNonPlaylists();
 
         SpotifyPlaylistDto.Playlist playlist = spotifyService.getPlaylist(spotifyTokenInfo.getTokenTypeAndAccessToken());
 
         TracksMainDto tracksMainDto = playlist.toTracks();
 
-        return ResponseEntity.ok(new CommonResponse<>(tracksMainDto));
+        return ResponseEntity.ok(new CommonResponse<>(nonPlaylists));
     }
 }

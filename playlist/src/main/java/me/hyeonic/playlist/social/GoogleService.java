@@ -5,16 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import me.hyeonic.playlist.dto.social.google.GoogleRequestDto;
 import me.hyeonic.playlist.dto.social.google.GoogleTokenInfo;
 import me.hyeonic.playlist.dto.social.google.playlist.YoutubePlaylistDto;
-import me.hyeonic.playlist.feign.GoogleAccountClient;
-import me.hyeonic.playlist.feign.GoogleClient;
+import me.hyeonic.playlist.feign.google.GoogleAccountClient;
+import me.hyeonic.playlist.feign.google.GoogleClient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -75,7 +70,7 @@ public class GoogleService {
 //        return response.getBody();
 
         return googleClient.getPlaylists(accessToken,
-                "id,snippet,status", 
+                "id,snippet,status",
                 true);
     }
 
