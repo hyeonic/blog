@@ -3,9 +3,9 @@ package me.hyeonic.springopenfeign.controller;
 import lombok.RequiredArgsConstructor;
 import me.hyeonic.springopenfeign.controller.dto.api.UserSaveRequestDto;
 import me.hyeonic.springopenfeign.domain.User;
+import me.hyeonic.springopenfeign.feign.CustomClient;
 import me.hyeonic.springopenfeign.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.List;
 public class TestController {
 
     private final UserService userService;
+    private final CustomClient customClient;
 
     @GetMapping("/test1")
     public List<User> test1() {
@@ -30,5 +31,11 @@ public class TestController {
                 .build();
 
         return userService.save(requestDto);
+    }
+
+    @GetMapping("/test3")
+    public String test3() {
+
+        return customClient.exampleHeader("Bearer aaaaaa.bbbbbb.cccccc");
     }
 }
