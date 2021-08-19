@@ -1,4 +1,4 @@
-package me.hyeonic.springopenfeign.controller;
+package me.hyeonic.springopenfeign.controller.api;
 
 import me.hyeonic.springopenfeign.domain.User;
 import org.springframework.web.bind.annotation.GetMapping;
