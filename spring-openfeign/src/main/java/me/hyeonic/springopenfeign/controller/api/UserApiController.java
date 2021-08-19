@@ -1,7 +1,10 @@
 package me.hyeonic.springopenfeign.controller.api;
 
+import me.hyeonic.springopenfeign.controller.dto.api.UserSaveRequestDto;
 import me.hyeonic.springopenfeign.domain.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +26,16 @@ public class UserApiController {
         users.add(User.builder().name("userE").age("17").build());
 
         return users;
+    }
+
+    @PostMapping("users")
+    public User saveUser(@RequestBody UserSaveRequestDto requestDto) {
+
+        User user = User.builder()
+                .name(requestDto.getName())
+                .age(requestDto.getAge())
+                .build();
+
+        return user;
     }
 }
