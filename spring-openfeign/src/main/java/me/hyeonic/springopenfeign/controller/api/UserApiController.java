@@ -1,9 +1,15 @@
 package me.hyeonic.springopenfeign.controller.api;
 
+import lombok.RequiredArgsConstructor;
 import me.hyeonic.springopenfeign.controller.dto.api.UserSaveRequestDto;
-import me.hyeonic.springopenfeign.domain.User;
+import me.hyeonic.springopenfeign.domain.user.User;
+import me.hyeonic.springopenfeign.domain.user.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,18 +18,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("api/v1")
+@RequiredArgsConstructor
 @RestController
 public class UserApiController {
 
-    @GetMapping("users")
-    public List<User> getUser() {
+    private final UserRepository userRepository;
 
-        List<User> users = new ArrayList<>();
-        users.add(User.builder().name("userA").age("20").build());
-        users.add(User.builder().name("userB").age("21").build());
-        users.add(User.builder().name("userC").age("23").build());
-        users.add(User.builder().name("userD").age("19").build());
-        users.add(User.builder().name("userE").age("17").build());
+    @GetMapping("users/{userId}")
+    public User getUser(@PathVariable Long userId) {
+
+        return userRepository.findById(userId).get();
+    }
+
+
+    @GetMapping("users")
+    public List<User> getUsers() {
+
+        Iterable<User> usersIterable = userRepository.findAll();
+        final List<User> users = new ArrayList<>();
+        usersIterable.forEach(users::add);
 
         return users;
     }
@@ -31,11 +44,23 @@ public class UserApiController {
     @PostMapping("users")
     public User saveUser(@RequestBody UserSaveRequestDto requestDto) {
 
-        User user = User.builder()
-                .name(requestDto.getName())
-                .age(requestDto.getAge())
-                .build();
+        return userRepository.save(requestDto.toEntity());
+    }
+
+    @PutMapping("users/{userId}")
+    public User update(@PathVariable Long userId,
+                       @RequestBody UserSaveRequestDto updateDto) {
+
+        User user = userRepository.findById(userId).get();
+        user.update(updateDto.toEntity());
 
         return user;
+    }
+
+    @DeleteMapping("users/{userId}")
+    public void delete(@PathVariable Long userId) {
+
+        User user = userRepository.findById(userId).get();
+        userRepository.delete(user);
     }
 }

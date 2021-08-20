@@ -1,41 +1,64 @@
 package me.hyeonic.springopenfeign.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import me.hyeonic.springopenfeign.controller.dto.api.UserSaveRequestDto;
-import me.hyeonic.springopenfeign.domain.User;
-import me.hyeonic.springopenfeign.feign.CustomClient;
 import me.hyeonic.springopenfeign.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-@RequiredArgsConstructor
 @RestController
+@RequestMapping("/")
+@RequiredArgsConstructor
 public class TestController {
 
     private final UserService userService;
-    private final CustomClient customClient;
 
-    @GetMapping("/test1")
-    public List<User> test1() {
-        return userService.getUsers();
-    }
+    @GetMapping("test1")
+    public Result test1() {
 
-    @GetMapping("/test2")
-    public User test2() {
-
-        UserSaveRequestDto requestDto = UserSaveRequestDto.builder()
-                .name("testUser")
+        UserSaveRequestDto userSaveRequestDto = UserSaveRequestDto.builder()
+                .name("userA")
                 .age("20")
                 .build();
 
-        return userService.save(requestDto);
+        return new Result(userService.save(userSaveRequestDto));
     }
 
-    @GetMapping("/test3")
-    public String test3() {
+    @GetMapping("test2")
+    public Result test2() {
+        return new Result(userService.findAll());
+    }
 
-        return customClient.exampleHeader("Bearer aaaaaa.bbbbbb.cccccc");
+    @GetMapping("test3")
+    public Result test3() {
+        return new Result(userService.findById(1L));
+    }
+
+    @GetMapping("test4")
+    public Result test4() {
+
+        UserSaveRequestDto updateDto = UserSaveRequestDto.builder()
+                .name("update userA")
+                .age("25")
+                .build();
+
+        return new Result(userService.update(1L, updateDto));
+    }
+
+    @GetMapping("test5")
+    public Result test5() {
+
+        userService.delete(1L);
+
+        return new Result("id가 1인 user가 삭제되었습니다.");
+    }
+
+    @Getter
+    @AllArgsConstructor
+    static class Result<T> {
+        T data;
     }
 }
