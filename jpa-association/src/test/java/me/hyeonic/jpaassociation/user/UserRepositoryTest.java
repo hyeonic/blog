@@ -1,0 +1,95 @@
+package me.hyeonic.jpaassociation.user;
+
+import me.hyeonic.jpaassociation.knowledge.Knowledge;
+import me.hyeonic.jpaassociation.knowledge.KnowledgeRepository;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@DataJpaTest
+@ActiveProfiles("test")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class UserRepositoryTest {
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    KnowledgeRepository knowledgeRepository;
+
+    static Knowledge generateKnowledge(User user, String title, String content) {
+        return Knowledge.builder()
+                .user(user)
+                .title(title)
+                .content(content)
+                .build();
+    }
+
+    @Test
+    @DisplayName("user 저장")
+    void save() {
+
+        // given
+        String email = "dev.hyeonic@gmail.com";
+        User user = User.builder()
+                .email(email)
+                .build();
+
+        // when
+        userRepository.save(user);
+
+        List<User> users = userRepository.findAll();
+
+        // then
+        assertEquals(1, users.size());
+    }
+
+    @Test
+    @DisplayName("user가 등록한 knowledge 조회")
+    void findByKnowledge() {
+
+        // given
+        String email = "dev.hyeonic@gmail.com";
+        User user = User.builder()
+                .email(email)
+                .build();
+
+        userRepository.save(user);
+        Knowledge knowledge1 = knowledgeRepository.save(generateKnowledge(user, "지식1", "지식1 내용"));
+        Knowledge knowledge2 = knowledgeRepository.save(generateKnowledge(user, "지식2", "지식2 내용"));
+
+        System.out.println("==============================");
+        System.out.println(knowledge1.getUser().getEmail());
+        System.out.println(knowledge1.getTitle());
+        System.out.println(knowledge1.getContent());
+
+        System.out.println("==============================");
+        System.out.println(knowledge2.getUser().getEmail());
+        System.out.println(knowledge2.getTitle());
+        System.out.println(knowledge2.getContent());
+
+        // when
+        User findUser = userRepository.findById(user.getId()).get();
+        List<Knowledge> knowledges = findUser.getKnowledges();
+
+        // then
+        for (Knowledge knowledge : knowledges) {
+            System.out.println("==============================");
+            System.out.println(knowledge.getUser().getEmail());
+            System.out.println(knowledge.getTitle());
+            System.out.println(knowledge.getContent());
+        }
+
+        assertAll(
+                () -> assertEquals(user, findUser),
+                () -> assertEquals(2, knowledges.size())
+        );
+    }
+}
