@@ -1,7 +1,6 @@
 package me.hyeonic.modernjavainaction.chapter07;
 
 import java.util.Spliterator;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
