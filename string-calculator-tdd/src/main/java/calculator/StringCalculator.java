@@ -25,8 +25,19 @@ public class StringCalculator {
     }
 
     private static int sum(String[] values) {
+        validateNegative(values);
         return Arrays.stream(values)
             .mapToInt(Integer::parseInt)
             .sum();
+    }
+
+    private static void validateNegative(String[] values) {
+        boolean isContainsNegative = Arrays.stream(values)
+            .mapToInt(Integer::parseInt)
+            .anyMatch(number -> number < 0);
+
+        if (isContainsNegative) {
+            throw new RuntimeException();
+        }
     }
 }

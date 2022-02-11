@@ -88,4 +88,16 @@ class StringCalculatorTest {
         // then
         assertThat(result).isEqualTo(6);
     }
+
+    @DisplayName("음수를 전달할 경우 `RuntimeException` 예외가 발생해야 한다.")
+    @Test
+    void splitAndSum_음수() {
+        // given
+        String text = "-1,2,3";
+
+        // when & then
+        assertThatThrownBy(() -> {
+            StringCalculator.splitAndSum(text);
+        }).isInstanceOf(RuntimeException.class);
+    }
 }
