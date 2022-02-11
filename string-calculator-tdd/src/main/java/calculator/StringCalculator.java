@@ -9,7 +9,7 @@ public class StringCalculator {
             return 0;
         }
 
-        String[] splitValues = text.split(",");
+        String[] splitValues = text.split("[,:]");
         return sum(splitValues);
     }
 
