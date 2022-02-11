@@ -2,9 +2,12 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -71,5 +74,18 @@ class StringCalculatorTest {
 
         // then
         assertThat(result).isEqualTo(Integer.parseInt(expected));
+    }
+
+    @DisplayName("`//`와 `\\n` 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @Test
+    void splitAndSum_custom_구분자() {
+        // given
+        String text = "//;\n1;2;3";
+
+        // when
+        int result = StringCalculator.splitAndSum(text);
+
+        // then
+        assertThat(result).isEqualTo(6);
     }
 }
