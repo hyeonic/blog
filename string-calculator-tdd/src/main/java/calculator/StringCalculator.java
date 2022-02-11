@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class StringCalculator {
@@ -8,6 +9,13 @@ public class StringCalculator {
             return 0;
         }
 
-        return Integer.parseInt(text);
+        String[] splitValues = text.split(",");
+        return sum(splitValues);
+    }
+
+    private static int sum(String[] values) {
+        return Arrays.stream(values)
+            .mapToInt(Integer::parseInt)
+            .sum();
     }
 }
