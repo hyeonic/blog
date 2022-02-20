@@ -39,6 +39,7 @@
 * [x] Dollar의 `equals()`는 `null`인 경우 false이다.
 * [x] Dollar의 `equals()`는 다른 객체와 비교하는 경우 false이다.
 * [x] 통화의 종류는 USD(Dollar)와 CHF(Franc)로 두 가지이다.
+* [x] Dollar와 Franc의 중복을 제거한다.
 * [ ] 통화가 다른 두 금액을 더하여 주어진 환율에 맞게 금액을 변환한다.
 
 ## References
