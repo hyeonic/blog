@@ -2,7 +2,7 @@ package bank;
 
 import java.util.Objects;
 
-public abstract class Money {
+public class Money {
     protected int amount;
     protected String currency;
 
@@ -12,21 +12,19 @@ public abstract class Money {
     }
 
     public static Money dollar(int amount) {
-        return new Dollar(amount, "USD");
+        return new Money(amount, "USD");
     }
 
     public static Money franc(int amount) {
-        return new Franc(amount, "CHF");
+        return new Money(amount, "CHF");
     }
 
-    public abstract Money times(int amount);
+    public Money times(int multiplier) {
+        return new Money(amount * multiplier, currency);
+    }
 
     public int getAmount() {
         return amount;
-    }
-
-    public String getCurrency() {
-        return currency;
     }
 
     @Override
