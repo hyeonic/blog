@@ -61,4 +61,18 @@ public class DollarTest {
         // then
         assertThat(result).isFalse();
     }
+
+    @DisplayName("Dollar의 `equals()`는 `null`인 경우 false이다.")
+    @Test
+    void testEqualityNoneNull() {
+        // given
+        Dollar dollar1 = new Dollar(5);
+        Dollar dollar2 = null;
+
+        // when
+        boolean result = dollar1.equals(dollar2);
+
+        // then
+        assertThat(result).isFalse();
+    }
 }

@@ -36,6 +36,7 @@
 * [x] Dollar에서 times 연산을 수행하면 amount의 상태가 바뀌지 않아야 한다.
 * [x] `new Dollar(5).equals(new Dollar(5))`는 true를 만족해야 한다. 즉 `동등성`을 만족한다.
 * [x] `new Dollar(5).equals(new Dollar(6))`은 false를 만족해야 한다.
+* [x] Dollar의 `equals()`는 `null`인 경우 false이다.
 * [ ] 통화가 다른 두 금액을 더하여 주어진 환율에 맞게 금액을 변환한다.
 
 ## References
