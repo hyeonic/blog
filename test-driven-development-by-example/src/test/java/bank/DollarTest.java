@@ -33,4 +33,32 @@ public class DollarTest {
         // then
         assertThat(five.getAmount()).isEqualTo(5);
     }
+
+    @DisplayName("`new Dollar(5).equals(new Dollar(5))`는 true를 만족해야 한다. 즉 `동등성`을 만족한다.")
+    @Test
+    void testEquality() {
+        // given
+        Dollar dollar1 = new Dollar(5);
+        Dollar dollar2 = new Dollar(5);
+
+        // when
+        boolean result = dollar1.equals(dollar2);
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @DisplayName("`new Dollar(5).equals(new Dollar(6))`은 false를 만족해야 한다.")
+    @Test
+    void testNoneEquality() {
+        // given
+        Dollar dollar1 = new Dollar(5);
+        Dollar dollar2 = new Dollar(6);
+
+        // when
+        boolean result = dollar1.equals(dollar2);
+
+        // then
+        assertThat(result).isFalse();
+    }
 }
