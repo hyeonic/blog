@@ -14,9 +14,23 @@ public class DollarTest {
         Dollar five = new Dollar(5);
 
         // when
-        five.times(2);
+        Dollar product = five.times(2);
 
         // then
-        assertThat(five.getAmount()).isEqualTo(10);
+        assertThat(product.getAmount()).isEqualTo(10);
+    }
+
+    @DisplayName("Dollar에서 times 연산을 수행하면 amount의 상태가 바뀌지 않아야 한다.")
+    @Test
+    void testMultiplicationKeepValue() {
+        // given
+        Dollar five = new Dollar(5);
+
+        // when
+        five.times(2);
+        five.times(3);
+
+        // then
+        assertThat(five.getAmount()).isEqualTo(5);
     }
 }
