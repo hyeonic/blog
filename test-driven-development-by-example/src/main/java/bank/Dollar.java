@@ -17,7 +17,7 @@ public class Dollar {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null) {
+        if (object == null || this.getClass() != object.getClass()) {
             return false;
         }
         Dollar dollar = (Dollar) object;

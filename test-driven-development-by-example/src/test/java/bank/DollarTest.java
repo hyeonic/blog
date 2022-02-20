@@ -75,4 +75,18 @@ public class DollarTest {
         // then
         assertThat(result).isFalse();
     }
+
+    @DisplayName("Dollar의 `equals()`는 다른 객체와 비교하는 경우 false이다.")
+    @Test
+    void testEqualityNoneDollarObject() {
+        // given
+        Dollar dollar = new Dollar(5);
+        Object Object = new Object();
+
+        // when
+        boolean result = dollar.equals(Object);
+
+        // then
+        assertThat(result).isFalse();
+    }
 }
