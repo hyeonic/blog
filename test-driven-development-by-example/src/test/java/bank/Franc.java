@@ -1,14 +1,14 @@
 package bank;
 
-public class Dollar {
+public class Franc {
     private final int amount;
 
-    public Dollar(int amount) {
+    public Franc(int amount) {
         this.amount = amount;
     }
 
-    public Dollar times(int multiplier) {
-        return new Dollar(this.amount * multiplier);
+    public Franc times(int multiplier) {
+        return new Franc(this.amount * multiplier);
     }
 
     public int getAmount() {
@@ -20,7 +20,7 @@ public class Dollar {
         if (object == null || this.getClass() != object.getClass()) {
             return false;
         }
-        Dollar dollar = (Dollar) object;
-        return this.amount == dollar.amount;
+        Franc franc = (Franc) object;
+        return this.amount == franc.amount;
     }
 }
