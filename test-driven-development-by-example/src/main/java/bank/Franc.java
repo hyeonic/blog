@@ -1,7 +1,6 @@
 package bank;
 
-public class Franc {
-    private final int amount;
+public class Franc extends Money {
 
     public Franc(int amount) {
         this.amount = amount;
@@ -13,14 +12,5 @@ public class Franc {
 
     public int getAmount() {
         return amount;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (object == null || this.getClass() != object.getClass()) {
-            return false;
-        }
-        Franc franc = (Franc) object;
-        return this.amount == franc.amount;
     }
 }
