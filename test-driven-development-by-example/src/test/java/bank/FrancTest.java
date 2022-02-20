@@ -11,10 +11,10 @@ public class FrancTest {
     @Test
     void testMultiplication() {
         // given
-        Franc five = new Franc(5);
+        Money five = Money.franc(5);
 
         // when
-        Franc product = five.times(2);
+        Money product = five.times(2);
 
         // then
         assertThat(product.getAmount()).isEqualTo(10);
