@@ -1,4 +1,4 @@
-package me.hyeonic.chapter02.item5.before;
+package me.hyeonic.chapter02.item05.before;
 
 import static java.util.stream.Collectors.toList;
 
@@ -13,16 +13,15 @@ public class AutoLottoNumberGenerator {
             .boxed()
             .collect(toList());
 
-    private static final int LOTTO_NUMBERS_FROM_INDEX = 0;
-    private static final int LOTTO_NUMBERS_TO_INDEX = 6;
-
     private AutoLottoNumberGenerator() {
     }
 
-    public static List<Integer> generate() {
+    public static List<Integer> generate(int size) {
         List<Integer> lottoTotalNumbers = new ArrayList<>(LOTTO_TOTAL_NUMBERS);
         Collections.shuffle(lottoTotalNumbers);
 
-        return lottoTotalNumbers.subList(LOTTO_NUMBERS_FROM_INDEX, LOTTO_NUMBERS_TO_INDEX);
+        return lottoTotalNumbers.stream()
+                .limit(size)
+                .collect(toList());
     }
 }

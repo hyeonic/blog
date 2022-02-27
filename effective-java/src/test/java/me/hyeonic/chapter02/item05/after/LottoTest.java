@@ -1,4 +1,4 @@
-package me.hyeonic.chapter02.item5.after;
+package me.hyeonic.chapter02.item05.after;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,7 +27,7 @@ class LottoTest {
     void 수동_로또_번호_생성() {
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoNumberGenerator lottoNumberGenerator = () -> numbers;
+        LottoNumberGenerator lottoNumberGenerator = (size) -> numbers;
 
         // when
         Lotto lotto = new Lotto(lottoNumberGenerator);

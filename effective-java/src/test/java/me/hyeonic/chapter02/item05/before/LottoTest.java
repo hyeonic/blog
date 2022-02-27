@@ -1,8 +1,8 @@
-package me.hyeonic.chapter02.item5.before;
+package me.hyeonic.chapter02.item05.before;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import me.hyeonic.chapter02.item5.after.LottoNumber;
+import me.hyeonic.chapter02.item05.after.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

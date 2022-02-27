@@ -1,4 +1,4 @@
-package me.hyeonic.chapter02.item5.before;
+package me.hyeonic.chapter02.item05.before;
 
 public class LottoNumber {
 
