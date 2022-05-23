@@ -1,13 +1,13 @@
-package me.hyeonic.subwaymap;
+package me.hyeonic.subway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SubwayMapApplication {
+public class SubwayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SubwayMapApplication.class, args);
+        SpringApplication.run(SubwayApplication.class, args);
     }
 
 }
