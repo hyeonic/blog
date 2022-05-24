@@ -18,21 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/stations")
 public class StationController {
 
+    private final StationService stationService;
+
+    public StationController(StationService stationService) {
+        this.stationService = stationService;
+    }
+
     @PostMapping
     public ResponseEntity<StationResponse> createStation(@RequestBody StationRequest stationRequest) {
-        StationResponse stationResponse = StationService.save(stationRequest);
+        StationResponse stationResponse = stationService.save(stationRequest);
         return ResponseEntity.created(URI.create("/stations/" + stationResponse.getId())).body(stationResponse);
     }
 
     @GetMapping
     public ResponseEntity<List<StationResponse>> showStations() {
-        List<StationResponse> stationResponses = StationService.findAll();
+        List<StationResponse> stationResponses = stationService.findAll();
         return ResponseEntity.ok(stationResponses);
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteStation(@PathVariable Long id) {
-        StationService.deleteById(id);
+        stationService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

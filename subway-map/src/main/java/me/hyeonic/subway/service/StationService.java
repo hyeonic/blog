@@ -7,23 +7,31 @@ import me.hyeonic.subway.dao.StationDao;
 import me.hyeonic.subway.domain.Station;
 import me.hyeonic.subway.dto.StationRequest;
 import me.hyeonic.subway.dto.StationResponse;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StationService {
 
-    public static StationResponse save(StationRequest stationRequest) {
-        Station newStation = StationDao.save(new Station(stationRequest.getName()));
+    private final StationDao stationDao;
+
+    public StationService(StationDao stationDao) {
+        this.stationDao = stationDao;
+    }
+
+    public StationResponse save(StationRequest stationRequest) {
+        Station newStation = stationDao.save(new Station(stationRequest.getName()));
         return new StationResponse(newStation);
     }
 
-    public static List<StationResponse> findAll() {
-        List<Station> stations = StationDao.findAll();
+    public List<StationResponse> findAll() {
+        List<Station> stations = stationDao.findAll();
 
         return stations.stream()
                 .map(StationResponse::new)
                 .collect(toList());
     }
 
-    public static void deleteById(Long id) {
-        StationDao.deleteById(id);
+    public void deleteById(Long id) {
+        stationDao.deleteById(id);
     }
 }
