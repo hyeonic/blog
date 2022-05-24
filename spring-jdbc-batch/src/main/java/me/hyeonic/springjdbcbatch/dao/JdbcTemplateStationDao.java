@@ -18,12 +18,12 @@ public class JdbcTemplateStationDao {
     }
 
     public void save(Station station) {
-        String sql = "insert into STATION(name) values(?)";
+        String sql = "insert into STATION (name) values (?)";
         jdbcTemplate.update(sql, station.getName());
     }
 
     public void saveAll(List<Station> stations) {
-        String sql = "insert into STATION(name) values(?)";
+        String sql = "insert into STATION (name) values (?)";
 
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
